@@ -1,0 +1,10 @@
+services:
+  web:
+    build: .
+    ports:
+      - "${WEB_PORT:-8080}:80"
+    restart: unless-stopped
+    # No domain is hardcoded here. TLS termination and the public domain are
+    # handled by the reverse proxy in front of this container (see CLAUDE.md
+    # "Hosted at home") — point it at this service's port, or set WEB_PORT
+    # to change the host-side port.

@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.astro/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local planning file (not part of the shipped project)
+TODO.md
+
+CLAUDE.md
+
+# TLS / key material
+*.pem
+*.key
+*.crt
+*.p12
+
+# Local docker-compose overrides (real ports/paths, not for the public repo)
+docker-compose.override.yml

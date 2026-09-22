@@ -1,0 +1,67 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { languages, defaultLang } from "../i18n/ui";
+import { getLangFromUrl, useTranslations, pathWithoutLocale } from "../i18n/utils";
+
+const lang = Astro.currentLocale ?? getLangFromUrl(Astro.url) ?? defaultLang;
+const t = useTranslations(lang);
+
+const navLinks = [
+  { label: t("nav.projects"), href: "/projects" },
+  { label: t("nav.contact"), href: "/contact" },
+];
+
+const currentPath = Astro.url.pathname;
+const basePath = pathWithoutLocale(currentPath);
+const isActive = (href: string) =>
+  href === "/" ? basePath === "/" : basePath.startsWith(href);
+
+const localeSwitchLinks = Object.entries(languages).map(([code, label]) => ({
+  code,
+  label,
+  href: getRelativeLocaleUrl(code, basePath),
+}));
+---
+
+<header class="sticky top-0 z-50 border-b border-border bg-bg">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 sm:px-10">
+    <a
+      href={getRelativeLocaleUrl(lang, "/")}
+      class="font-mono text-sm tracking-wide text-text transition-colors hover:text-accent"
+    >
+      massb.dev
+    </a>
+    <nav class="flex items-center gap-6">
+      {
+        navLinks.map((link) => (
+          <a
+            href={getRelativeLocaleUrl(lang, link.href)}
+            class={`font-mono text-xs uppercase tracking-wide transition-colors hover:text-accent ${
+              isActive(link.href) ? "text-accent" : "text-text-muted"
+            }`}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <div class="flex items-center gap-1 border-l border-border pl-6 font-mono text-xs uppercase tracking-wide">
+        {
+          localeSwitchLinks.map((locale, i) => (
+            <>
+              {i > 0 && <span class="text-text-muted" aria-hidden="true">/</span>}
+              <a
+                href={locale.href}
+                class={`transition-colors hover:text-accent ${
+                  locale.code === lang ? "text-accent" : "text-text-muted"
+                }`}
+                aria-current={locale.code === lang ? "true" : undefined}
+              >
+                {locale.label}
+              </a>
+            </>
+          ))
+        }
+      </div>
+    </nav>
+  </div>
+</header>

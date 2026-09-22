@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectsGrid from "../components/ProjectsGrid.astro";
+import { defaultLang } from "../i18n/ui";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = Astro.currentLocale ?? getLangFromUrl(Astro.url) ?? defaultLang;
+const t = useTranslations(lang);
+---
+
+<BaseLayout title="Projets — massb.dev" description={t("site.description")}>
+  <main>
+    <ProjectsGrid />
+  </main>
+</BaseLayout>

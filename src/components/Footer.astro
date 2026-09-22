@@ -1,0 +1,30 @@
+---
+// Infra links (status/graph/account) have no confirmed URLs yet, so they
+// render as plain labels (not fabricated hrefs) until real ones are given —
+// same "never fabricate a link" rule as src/data/projects.ts.
+
+import { defaultLang } from "../i18n/ui";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = Astro.currentLocale ?? getLangFromUrl(Astro.url) ?? defaultLang;
+const t = useTranslations(lang);
+
+const infraLabels = [t("footer.status"), t("footer.graph"), t("footer.account")];
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-border px-6 py-10 sm:px-10">
+  <div class="mx-auto flex max-w-6xl flex-col gap-4 font-mono text-xs uppercase tracking-wide text-text-muted sm:flex-row sm:items-center sm:justify-between">
+    <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+      {
+        infraLabels.map((label, i) => (
+          <>
+            {i > 0 && <span aria-hidden="true">&middot;</span>}
+            <span>{label}</span>
+          </>
+        ))
+      }
+    </div>
+    <p>&copy; {year} massb.dev</p>
+  </div>
+</footer>

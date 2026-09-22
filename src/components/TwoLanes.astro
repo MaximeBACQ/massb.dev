@@ -1,0 +1,96 @@
+---
+// Security is a connecting thread between Dev and Infra, not a third lane —
+// see CLAUDE.md. Chosen execution (final, after two rounds of review): a plain
+// olive hairline bracket spanning above both lanes with a centered "Secured by
+// design" nameplate. Two other executions (a literal chain-link icon in the
+// label chip, and a drawn schematic chain bridging the lanes) were tried and
+// dropped — neither read as clean/legible as this one.
+
+import { defaultLang } from "../i18n/ui";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = Astro.currentLocale ?? getLangFromUrl(Astro.url) ?? defaultLang;
+const t = useTranslations(lang);
+
+const devItems = [
+  t("twoLanes.dev.item.1"),
+  t("twoLanes.dev.item.2"),
+  t("twoLanes.dev.item.3"),
+  t("twoLanes.dev.item.4"),
+];
+
+const infraItems = [
+  t("twoLanes.infra.item.1"),
+  t("twoLanes.infra.item.2"),
+  t("twoLanes.infra.item.3"),
+  t("twoLanes.infra.item.4"),
+  t("twoLanes.infra.item.5"),
+];
+---
+
+<section id="two-lanes" class="px-6 py-20 sm:px-10">
+  <div class="mx-auto max-w-6xl">
+    <div class="relative mb-10 h-12">
+      <svg
+        class="absolute inset-0 h-full w-full"
+        viewBox="0 0 100 48"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M1 48 L1 8 L99 8 L99 48"
+          fill="none"
+          stroke="var(--color-accent-2)"
+          stroke-width="1"
+          vector-effect="non-scaling-stroke"
+        />
+      </svg>
+      <span class="absolute left-1/2 top-0 z-10 inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 border border-border bg-bg px-3 py-1 font-mono text-xs uppercase tracking-wide text-text-muted">
+        <span class="h-1.5 w-1.5 rounded-full bg-accent-2" aria-hidden="true" />
+        {t("twoLanes.security")}
+      </span>
+    </div>
+
+    <div class="grid grid-cols-1 gap-10 sm:grid-cols-2">
+      <div class="border-l-2 border-accent pl-5">
+        <p class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-text-muted">
+          <span class="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
+          {t("twoLanes.dev.eyebrow")}
+        </p>
+        <h2 class="mt-3 font-display text-3xl font-bold leading-tight text-text">
+          {t("twoLanes.dev.heading")}
+        </h2>
+        <p class="mt-3 font-sans text-sm text-text-muted">
+          {t("twoLanes.dev.intro")}
+        </p>
+        <ul class="mt-5 flex flex-col gap-2">
+          {devItems.map((item) => (
+            <li class="font-mono text-sm text-text-muted">
+              <span class="text-accent">&gt;</span> {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="border-l-2 border-accent-2 pl-5">
+        <p class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-text-muted">
+          <span class="h-1.5 w-1.5 rounded-full border border-accent-2 bg-transparent" aria-hidden="true" />
+          {t("twoLanes.infra.eyebrow")}
+        </p>
+        <h2 class="mt-3 font-display text-2xl font-semibold leading-tight text-text">
+          {t("twoLanes.infra.heading")}
+        </h2>
+        <p class="mt-3 font-sans text-sm text-text-muted">
+          {t("twoLanes.infra.intro")}
+        </p>
+        <ul class="mt-5 flex flex-col gap-2">
+          {infraItems.map((item) => (
+            <li class="font-mono text-sm text-text-muted">
+              <span class="text-accent-2">&gt;</span> {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

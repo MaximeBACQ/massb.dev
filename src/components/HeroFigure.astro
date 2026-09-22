@@ -1,0 +1,30 @@
+---
+// Drop the real SVG at public/images/homelab-image.svg and it shows
+// automatically on the next build/dev-reload — no code change needed. Until
+// then, render a clean placeholder frame rather than a broken image.
+import fs from "node:fs";
+import path from "node:path";
+
+const SVG_PATH = "/objects.svg";
+const hasimage = fs.existsSync(
+  path.join(process.cwd(), "public", SVG_PATH),
+);
+---
+
+<div class="aspect-[4/3] w-full">
+  {
+    hasimage ? (
+      <img
+        src={SVG_PATH}
+        alt="Homelab architecture image"
+        class="h-full w-full object-contain"
+      />
+    ) : (
+      <div class="flex h-full w-full items-center justify-center border border-dashed border-border">
+        <span class="font-mono text-xs uppercase tracking-wide text-text-muted">
+          image coming
+        </span>
+      </div>
+    )
+  }
+</div>

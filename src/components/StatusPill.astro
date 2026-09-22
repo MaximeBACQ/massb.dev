@@ -1,0 +1,46 @@
+---
+import type { ProjectStatus } from "../data/projects";
+import { defaultLang } from "../i18n/ui";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+interface Props {
+  status: ProjectStatus;
+}
+
+const { status } = Astro.props;
+const lang = Astro.currentLocale ?? getLangFromUrl(Astro.url) ?? defaultLang;
+const t = useTranslations(lang);
+
+// Differentiated by dot fill + label + border style only — never a new hue.
+// See CLAUDE.md "Design tokens" status pill spec.
+const config: Record<ProjectStatus, { chip: string; dot: string }> = {
+  stable: {
+    chip: "border-accent text-accent",
+    dot: "bg-accent",
+  },
+  experimental: {
+    chip: "border-accent border-dashed text-accent",
+    dot: "border border-accent bg-transparent",
+  },
+  archived: {
+    chip: "border-border text-text-muted",
+    dot: "border border-archived bg-transparent",
+  },
+};
+
+const labels: Record<ProjectStatus, string> = {
+  stable: t("status.stable"),
+  experimental: t("status.experimental"),
+  archived: t("status.archived"),
+};
+
+const { chip, dot } = config[status];
+---
+
+<span
+  class={`inline-flex items-center gap-1.5 border px-2 py-0.5 font-mono text-[11px] uppercase tracking-wide ${chip}`}
+  data-status={status}
+>
+  <span class={`h-1.5 w-1.5 rounded-full ${dot}`} aria-hidden="true"></span>
+  {labels[status]}
+</span>

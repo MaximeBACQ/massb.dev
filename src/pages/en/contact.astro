@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { defaultLang } from "../../i18n/ui";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+const lang = Astro.currentLocale ?? getLangFromUrl(Astro.url) ?? defaultLang;
+const t = useTranslations(lang);
+
+const contactItems = [
+  { label: t("contact.email"), value: t("contact.email.value") },
+  { label: t("contact.github"), value: t("contact.github.value") },
+  { label: t("contact.linkedin"), value: t("contact.linkedin.value") },
+];
+---
+
+<BaseLayout title="Contact — massb.dev" description={t("site.description")}>
+  <main>
+    <section class="px-6 py-20 sm:px-10">
+      <div class="mx-auto max-w-6xl">
+        <p
+          class="inline-flex items-center gap-2 border border-border px-3 py-1 font-mono text-xs uppercase tracking-wide text-text-muted"
+        >
+          <span class="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true"
+          ></span>
+          {t("contact.eyebrow")}
+        </p>
+        <h1 class="mt-4 font-display text-4xl font-bold leading-tight text-text sm:text-5xl">
+          {t("contact.heading")}
+        </h1>
+        <p class="mt-4 max-w-prose font-sans text-text-muted">
+          {t("contact.intro")}
+        </p>
+
+        <ul class="mt-8 flex max-w-md flex-col divide-y divide-border border border-border">
+          {
+            contactItems.map((item) => (
+              <li class="flex items-center justify-between gap-4 px-4 py-3">
+                <span class="font-mono text-xs uppercase tracking-wide text-text-muted">
+                  {item.label}
+                </span>
+                <span class="font-mono text-sm text-text-muted">
+                  {item.value}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
