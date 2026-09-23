@@ -11,6 +11,9 @@
 @import "@fontsource/ibm-plex-sans/400.css";
 @import "@fontsource/ibm-plex-sans/500.css";
 @import "@fontsource/ibm-plex-sans/600.css";
+/* Wordmark face (trial): Nabla — a colour (COLRv1) font, so it renders its own
+   built-in palette and ignores CSS `color`. Used only on the header "massb.dev". */
+@import "@fontsource/nabla/400.css";
 
 /* Warm-autumn design tokens — see CLAUDE.md for the approved palette/type rationale. */
 @theme {
@@ -22,10 +25,13 @@
   --color-accent: #b8502e;
   --color-accent-2: #6f7444;
   --color-archived: #6b6058;
+  /* Warm brown from the INFRA blob in public/objects.svg — project cover hover wash. */
+  --color-bark: #8b5a3c;
 
   --font-display: "Fraunces", serif;
   --font-mono: "IBM Plex Mono", monospace;
   --font-sans: "IBM Plex Sans", sans-serif;
+  --font-wordmark: "Nabla", system-ui;
 }
 
 @layer base {

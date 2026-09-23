@@ -16,7 +16,8 @@ export const ui = {
 
     "hero.eyebrow": "SELF-HOSTED WORKSHOP",
     "hero.headline":
-      "I build apps, security tools, games, or anything that feels like it could be fun or help me.",
+      "I build apps, security tools, games, or anything that feels like it could be\nfun or help me.",
+    "hero.headlineHighlight": "fun or help me",
     "hero.tagline": "Everything here runs on my personal homelab.",
     "hero.selfHostLine": "Self-hosted on my own homelab.",
     "hero.cta.primary": "See projects",
@@ -104,7 +105,8 @@ export const ui = {
 
     "hero.eyebrow": "ATELIER AUTO-HÉBERGÉ",
     "hero.headline":
-      "Je construis des applis, des outils de sécurité, des jeux, ou tout ce qui me semble amusant ou utile.",
+      "Je construis des applis, des outils de sécurité, des jeux, ou tout ce qui me semble\namusant ou utile.",
+    "hero.headlineHighlight": "amusant ou utile",
     "hero.tagline": "Tout ce qui est ici tourne sur mon homelab personnel.",
     "hero.selfHostLine": "Auto-hébergé sur mon propre homelab.",
     "hero.cta.primary": "Voir les projets",

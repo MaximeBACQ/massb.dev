@@ -1,4 +1,5 @@
 ---
+import "@fontsource/mogra";
 import HeroFigure from "./HeroFigure.astro";
 
 interface Cta {
@@ -9,14 +10,21 @@ interface Cta {
 interface Props {
   eyebrow: string;
   headline: string;
+  /** Part of `headline` shown in the accent color. */
+  headlineHighlight?: string;
   tagline: string;
   selfHostLine: string;
   primaryCta: Cta;
   secondaryCta: Cta;
 }
 
-const { eyebrow, headline, tagline, selfHostLine, primaryCta, secondaryCta } =
+const { eyebrow, headline, headlineHighlight, tagline, selfHostLine, primaryCta, secondaryCta } =
   Astro.props;
+
+// Split the headline around the highlighted phrase (if present) so it can be colored.
+const [before, after] = headlineHighlight && headline.includes(headlineHighlight)
+  ? headline.split(headlineHighlight, 2)
+  : [headline, undefined];
 ---
 
 <section class="px-6 pb-20 pt-16 sm:px-10 sm:pt-20">
@@ -26,8 +34,8 @@ const { eyebrow, headline, tagline, selfHostLine, primaryCta, secondaryCta } =
         <span class="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true"></span>
         {eyebrow}
       </p>
-      <h1 class="mt-4 font-display text-3xl font-semibold leading-snug text-text sm:text-4xl">
-        {headline}
+      <h1 class="mt-4 max-w-xl whitespace-pre-line text-3xl leading-snug text-text sm:text-4xl" style="font-family: 'Mogra'">
+        {before}{after !== undefined && <span class="text-accent">{headlineHighlight}</span>}{after}
       </h1>
       <p class="mt-6 max-w-prose font-sans text-lg text-text-muted">
         {tagline}
