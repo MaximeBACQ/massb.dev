@@ -1,13 +1,14 @@
 # massb.dev
 
 Personal portfolio site — curated projects plus a technical note on the self-hosted
-homelab this site runs on. Static Astro build, no backend, no database.
+homelab this site runs on. Static Astro build plus a tiny contact-form relay, no database.
 
 ## Stack
 
 - [Astro](https://astro.build) (static output) + TypeScript + Tailwind CSS
 - Fonts self-hosted via `@fontsource/*` (no external font CDN calls at runtime)
-- No CMS, no database, no external cloud dependency — fully static
+- No CMS, no database, no external cloud dependency
+- `contact-api/`: small Node service that relays the contact form to email over SMTP
 
 ## Local development
 
@@ -40,4 +41,24 @@ To build/run the image directly without compose:
 ```sh
 docker build -t massb-dev .
 docker run --rm -p 8080:80 massb-dev
+```
+
+## Contact form
+
+The contact form posts to `/api/contact`, which nginx forwards to the `contact`
+service (`contact-api/`). It sends mail through your own SMTP account:
+
+```sh
+cp .env.example .env   # fill in SMTP_HOST / SMTP_USER / SMTP_PASS / MAIL_FROM
+docker compose up --build
+```
+
+Spam protection is built in (rate limits, single-use form tokens, honeypot,
+validation, daily cap) — no captcha or third-party service. If the `contact`
+container is down, the site still serves; only the form returns an error.
+
+For local dev, run the relay next to `npm run dev` (Astro proxies `/api` to it):
+
+```sh
+cd contact-api && npm install && SMTP_HOST=... MAIL_FROM=... node server.mjs
 ```

@@ -12,6 +12,7 @@ export const defaultLang = "fr";
 export const ui = {
   en: {
     "nav.projects": "Projects",
+    "nav.github": "GitHub",
     "nav.contact": "Contact",
 
     "hero.eyebrow": "SELF-HOSTED WORKSHOP",
@@ -52,6 +53,7 @@ export const ui = {
     "projects.empty": "No projects match the selected filters.",
     "projects.writeupOnly": "Writeup-only",
     "projects.linksTbd": "Links: TBD",
+    "projects.pcOnly": "PC only",
     "projects.noCover": "No cover yet",
     "projects.yearTbd": "TBD",
 
@@ -69,13 +71,31 @@ export const ui = {
 
     "contact.eyebrow": "Contact",
     "contact.heading": "Get in touch",
-    "contact.intro": "[Placeholder — confirm wording]",
-    "contact.email": "Email",
-    "contact.github": "GitHub",
+    "contact.intro":
+      "Leave a message here and it lands straight in my inbox.",
     "contact.linkedin": "LinkedIn",
-    "contact.email.value": "[email — placeholder]",
-    "contact.github.value": "[github url — placeholder]",
-    "contact.linkedin.value": "[linkedin url — placeholder]",
+    "contact.privacy":
+      "No captcha, no tracking. Spam gets filtered on my own server, and your email is only used to reply to you.",
+    "contact.form.name": "Your name",
+    "contact.form.email": "Your email",
+    "contact.form.message": "Message",
+    "contact.form.messagePlaceholder": "What's on your mind?",
+    "contact.form.send": "Send message",
+    "contact.form.sending": "Sending…",
+    "contact.form.honeypot": "Leave this field empty",
+    "contact.form.sent.heading": "Message sent",
+    "contact.form.sent.body": "Thanks! I'll get back to you at",
+    "contact.form.sent.again": "Write another one",
+    "contact.error.name": "Enter your name (100 characters max).",
+    "contact.error.email": "Enter a valid email address so I can reply.",
+    "contact.error.message.length": "Write at least 10 characters (5000 max).",
+    "contact.error.message.links": "Too many links — keep it to 3 or fewer.",
+    "contact.error.too-fast": "That was quick! Wait a few seconds and send again.",
+    "contact.error.expired": "This page has been open a while. Send again to refresh it.",
+    "contact.error.rate-limited":
+      "Too many messages from your connection. Try again in a few minutes.",
+    "contact.error.generic":
+      "The message couldn't be sent. Try again in a minute.",
 
     "hostedAtHome.eyebrow": "HOSTED AT HOME",
     "hostedAtHome.heading": "How it's hosted",
@@ -101,6 +121,7 @@ export const ui = {
   },
   fr: {
     "nav.projects": "Projets",
+    "nav.github": "GitHub",
     "nav.contact": "Contact",
 
     "hero.eyebrow": "ATELIER AUTO-HÉBERGÉ",
@@ -141,6 +162,7 @@ export const ui = {
     "projects.empty": "Aucun projet ne correspond aux filtres sélectionnés.",
     "projects.writeupOnly": "Writeup uniquement",
     "projects.linksTbd": "Liens : à venir",
+    "projects.pcOnly": "PC seulement",
     "projects.noCover": "Pas encore de couverture",
     "projects.yearTbd": "À venir",
 
@@ -158,13 +180,31 @@ export const ui = {
 
     "contact.eyebrow": "Contact",
     "contact.heading": "Me contacter",
-    "contact.intro": "[Placeholder — texte à confirmer]",
-    "contact.email": "Email",
-    "contact.github": "GitHub",
+    "contact.intro":
+      "Laissez un message ici, il arrive directement dans ma boîte mail.",
     "contact.linkedin": "LinkedIn",
-    "contact.email.value": "[email — à renseigner]",
-    "contact.github.value": "[url GitHub — à renseigner]",
-    "contact.linkedin.value": "[url LinkedIn — à renseigner]",
+    "contact.privacy":
+      "Pas de captcha, pas de pistage. Le spam est filtré sur mon propre serveur, et votre email ne sert qu'à vous répondre.",
+    "contact.form.name": "Votre nom",
+    "contact.form.email": "Votre email",
+    "contact.form.message": "Message",
+    "contact.form.messagePlaceholder": "Qu'avez-vous en tête ?",
+    "contact.form.send": "Envoyer le message",
+    "contact.form.sending": "Envoi…",
+    "contact.form.honeypot": "Laissez ce champ vide",
+    "contact.form.sent.heading": "Message envoyé",
+    "contact.form.sent.body": "Merci ! Je vous réponds à",
+    "contact.form.sent.again": "Écrire un autre message",
+    "contact.error.name": "Indiquez votre nom (100 caractères max).",
+    "contact.error.email": "Indiquez une adresse email valide pour que je puisse répondre.",
+    "contact.error.message.length": "Écrivez au moins 10 caractères (5000 max).",
+    "contact.error.message.links": "Trop de liens — 3 maximum.",
+    "contact.error.too-fast": "C'était rapide ! Attendez quelques secondes et renvoyez.",
+    "contact.error.expired": "Cette page est ouverte depuis longtemps. Renvoyez pour la rafraîchir.",
+    "contact.error.rate-limited":
+      "Trop de messages depuis votre connexion. Réessayez dans quelques minutes.",
+    "contact.error.generic":
+      "Le message n'a pas pu être envoyé. Réessayez dans une minute.",
 
     "hostedAtHome.eyebrow": "HÉBERGÉ À LA MAISON",
     "hostedAtHome.heading": "Comment c'est hébergé",

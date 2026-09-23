@@ -139,9 +139,26 @@ const statusLabels: Record<ProjectStatus, string> = {
       color 150ms,
       border-color 150ms;
   }
-  .filter-pill:hover {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
+  /* Hover only where it's real: on touch, a tap leaves :hover stuck, so a
+     just-deselected pill would still look active. */
+  @media (hover: hover) {
+    .filter-pill:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+  }
+
+  /* Touch: ~36px tall hit area (rows are 8px apart, so stay within that). */
+  @media (pointer: coarse) {
+    .filter-pill {
+      position: relative;
+    }
+
+    .filter-pill::after {
+      content: "";
+      position: absolute;
+      inset: -4px 0;
+    }
   }
   .filter-pill[data-active="true"] {
     border-color: var(--color-accent);

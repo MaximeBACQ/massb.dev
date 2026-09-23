@@ -25,6 +25,10 @@ const iconFor = (label: string) => {
   if (l.includes("source") || l.includes("code")) return "code";
   return "open";
 };
+// "Play" links are desktop WebGL builds that don't run on phones: touch
+// screens get a "PC only" note instead, and the cover opens the next link.
+const isPlay = (label: string) => iconFor(label) === "play";
+const touchCoverLink = links.find((link) => !isPlay(link.label));
 
 const tagLabels: Record<string, string> = {
   game: t("tag.game"),
@@ -38,7 +42,7 @@ const tagLabels: Record<string, string> = {
 ---
 
 <article
-  class="flex flex-col border border-border bg-surface"
+  class="project-card flex flex-col border border-border bg-surface"
   data-project-card
   data-status={status}
   data-tags={tags.join(",")}
@@ -83,6 +87,20 @@ const tagLabels: Record<string, string> = {
         </div>
       )
     }
+
+    {
+      /* Touch screens: no hover overlay, so tapping the cover just opens the
+         primary link (also in the footer, hence hidden from keyboard/AT). */
+      touchCoverLink && (
+        <a
+          href={touchCoverLink.url}
+          class="cover-tap"
+          tabindex="-1"
+          aria-hidden="true"
+          {...(isExternal(touchCoverLink.url) ? { target: "_blank", rel: "noopener" } : {})}
+        />
+      )
+    }
   </div>
 
   <div class="flex flex-1 flex-col gap-3 p-5">
@@ -124,12 +142,22 @@ const tagLabels: Record<string, string> = {
       {
         links.length > 0 ? (
           links.map((link) => (
-            <a
-              href={link.url}
-              class="font-mono text-xs uppercase tracking-wide text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
-            >
-              {link.label}
-            </a>
+            <>
+              <a
+                href={link.url}
+                class:list={[
+                  "tap-target font-mono text-xs uppercase tracking-wide text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent",
+                  { "desktop-only": isPlay(link.label) },
+                ]}
+              >
+                {link.label}
+              </a>
+              {isPlay(link.label) && (
+                <span class="touch-only font-mono text-xs uppercase tracking-wide text-text-muted">
+                  {t("projects.pcOnly")}
+                </span>
+              )}
+            </>
           ))
         ) : (
           <span class="font-mono text-xs uppercase tracking-wide text-text-muted">
@@ -142,6 +170,30 @@ const tagLabels: Record<string, string> = {
 </article>
 
 <style>
+  /* Card hover: a barely-there lift — grows ~1.5%, border warms toward rust. */
+  .project-card {
+    transition:
+      transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 300ms ease,
+      background-color 300ms ease;
+  }
+
+  /* Keyboard focus lifts the card everywhere; mouse hover only where hover is
+     real (on touch it would stick after a tap). */
+  .project-card:has(:focus-visible) {
+    transform: scale(1.015);
+    border-color: color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
+    background-color: color-mix(in srgb, var(--color-surface) 95%, var(--color-text));
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .project-card:hover {
+      transform: scale(1.015);
+      border-color: color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
+      background-color: color-mix(in srgb, var(--color-surface) 95%, var(--color-text));
+    }
+  }
+
   /* Cover hover: image fades back under a warm "infra blob" brown wash, and the
      cover splits into two soft halves (primary action left, secondary right). */
   .cover {
@@ -220,66 +272,70 @@ const tagLabels: Record<string, string> = {
       left 450ms var(--ease);
   }
 
-  /* Revealed state: on hover for mouse users, always on for touch screens. */
-  .cover:hover .cover-img {
-    opacity: 0.3;
-    transform: scale(1.05);
-    filter: blur(2px) saturate(0.7);
-  }
-
-  .cover:hover .cover-actions {
-    opacity: 1;
-  }
-
-  .cover:hover .cover-pill {
-    opacity: 1;
-    transform: none;
-    transition-delay: 60ms;
-  }
-
-  .cover:hover .cover-divider {
-    transform: scaleY(1);
-  }
-
-  /* The hovered half widens slightly and warms up; the divider follows it. */
-  .cover-half:hover {
-    flex-grow: 1.25;
-  }
-
-  /* The hovered half's edges glow a bit deeper. */
-  .cover-half:hover {
-    box-shadow: inset 0 0 64px 12px color-mix(in srgb, var(--color-bark) 90%, transparent);
-  }
-
-  .cover-half:hover .cover-pill {
-    background: var(--color-accent);
-    transform: translateY(-2px);
-  }
-
-  .cover-actions:has(.is-left:hover) .cover-divider {
-    left: 55.5%;
-  }
-
-  .cover-actions:has(.is-right:hover) .cover-divider {
-    left: 44.5%;
-  }
-
-  @media (hover: none) {
-    .cover-img {
-      opacity: 0.45;
+  /* Revealed state: mouse/trackpad users only. Touch screens have no real
+     hover (a tap fakes one and would reveal + navigate at once), so they get
+     the plain cover and use the footer links instead. */
+  @media (hover: hover) and (pointer: fine) {
+    .cover:hover .cover-img {
+      opacity: 0.3;
+      transform: scale(1.05);
+      filter: blur(2px) saturate(0.7);
     }
 
-    .cover-actions {
+    .cover:hover .cover-actions {
       opacity: 1;
     }
 
-    .cover-pill {
+    .cover:hover .cover-pill {
       opacity: 1;
-      transform: none !important;
+      transform: none;
+      transition-delay: 60ms;
     }
 
-    .cover-divider {
+    .cover:hover .cover-divider {
       transform: scaleY(1);
+    }
+
+    /* The hovered half widens slightly and its edges glow a bit deeper;
+       the divider follows it. */
+    .cover-half:hover {
+      flex-grow: 1.25;
+      box-shadow: inset 0 0 64px 12px color-mix(in srgb, var(--color-bark) 90%, transparent);
+    }
+
+    .cover-half:hover .cover-pill {
+      background: var(--color-accent);
+      transform: translateY(-2px);
+    }
+
+    .cover-actions:has(.is-left:hover) .cover-divider {
+      left: 55.5%;
+    }
+
+    .cover-actions:has(.is-right:hover) .cover-divider {
+      left: 44.5%;
+    }
+  }
+
+  .cover-tap,
+  .touch-only {
+    display: none;
+  }
+
+  @media not ((hover: hover) and (pointer: fine)) {
+    .cover-actions,
+    .desktop-only {
+      display: none;
+    }
+
+    .touch-only {
+      display: inline;
+    }
+
+    .cover-tap {
+      display: block;
+      position: absolute;
+      inset: 0;
     }
   }
 </style>

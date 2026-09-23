@@ -9,6 +9,7 @@ const t = useTranslations(lang);
 const navLinks = [
   { label: t("nav.projects"), href: "/projects" },
   { label: t("nav.contact"), href: "/contact" },
+  { label: t("nav.github"), href: "https://github.com/MaximeBACQ", external: true },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -24,34 +25,48 @@ const localeSwitchLinks = Object.entries(languages).map(([code, label]) => ({
 ---
 
 <header class="sticky top-0 z-50 border-b border-border bg-bg">
-  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 sm:px-10">
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-y-3 px-6 py-4 sm:px-10">
     <a
       href={getRelativeLocaleUrl(lang, "/")}
-      class="font-wordmark text-2xl leading-none transition-opacity hover:opacity-80 text-[oklch(82.8%_0.189_84.429)]"
+      class="tap-target font-wordmark text-2xl leading-none transition-opacity hover:opacity-80 text-[oklch(82.8%_0.189_84.429)]"
     >
       massb.dev
     </a>
-    <nav class="flex items-center gap-6">
+    <nav class="flex w-full items-center justify-between gap-4 sm:w-auto sm:justify-start sm:gap-6">
       {
-        navLinks.map((link) => (
-          <a
-            href={getRelativeLocaleUrl(lang, link.href)}
-            class={`font-mono text-xs uppercase tracking-wide transition-colors hover:text-accent ${
-              isActive(link.href) ? "text-accent" : "text-text-muted"
-            }`}
-          >
-            {link.label}
-          </a>
-        ))
+        navLinks.map((link) =>
+          link.external ? (
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="tap-target external-link inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wide text-text-muted transition-colors hover:text-accent"
+            >
+              {link.label}
+              <svg class="external-arrow" viewBox="0 0 12 12" width="9" height="9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3.5 2.5h6v6M9.5 2.5l-7 7" />
+              </svg>
+            </a>
+          ) : (
+            <a
+              href={getRelativeLocaleUrl(lang, link.href)}
+              class={`tap-target font-mono text-xs uppercase tracking-wide transition-colors hover:text-accent ${
+                isActive(link.href) ? "text-accent" : "text-text-muted"
+              }`}
+            >
+              {link.label}
+            </a>
+          ),
+        )
       }
-      <div class="flex items-center gap-1 border-l border-border pl-6 font-mono text-xs uppercase tracking-wide">
+      <div class="flex items-center gap-1 border-l border-border pl-4 font-mono sm:pl-6 text-xs uppercase tracking-wide">
         {
           localeSwitchLinks.map((locale, i) => (
             <>
               {i > 0 && <span class="text-text-muted" aria-hidden="true">/</span>}
               <a
                 href={locale.href}
-                class={`transition-colors hover:text-accent ${
+                class={`tap-target transition-colors hover:text-accent ${
                   locale.code === lang ? "text-accent" : "text-text-muted"
                 }`}
                 aria-current={locale.code === lang ? "true" : undefined}
@@ -65,3 +80,13 @@ const localeSwitchLinks = Object.entries(languages).map(([code, label]) => ({
     </nav>
   </div>
 </header>
+
+<style>
+  .external-arrow {
+    transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .external-link:hover .external-arrow {
+    transform: translate(1.5px, -1.5px);
+  }
+</style>

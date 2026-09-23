@@ -61,3 +61,17 @@
     }
   }
 }
+
+/* Touch screens: grow small links' hit area to ~40px tall without changing
+   their look or the layout (an invisible, absolutely-positioned overlay). */
+@media (pointer: coarse) {
+  .tap-target {
+    position: relative;
+  }
+
+  .tap-target::after {
+    content: "";
+    position: absolute;
+    inset: -12px -4px;
+  }
+}

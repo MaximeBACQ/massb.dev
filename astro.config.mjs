@@ -13,5 +13,10 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+    // In dev, forward the contact form to a locally running contact-api
+    // (`node contact-api/server.mjs`); in production nginx does this.
+    server: {
+      proxy: { '/api': 'http://localhost:3000' },
+    },
   },
 });

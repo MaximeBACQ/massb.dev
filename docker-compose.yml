@@ -8,3 +8,13 @@ services:
     # handled by the reverse proxy in front of this container (see CLAUDE.md
     # "Hosted at home") — point it at this service's port, or set WEB_PORT
     # to change the host-side port.
+
+  # Contact form relay — reached only through the web container's nginx at
+  # /api/contact, never exposed directly. SMTP settings come from .env
+  # (see .env.example).
+  contact:
+    build: ./contact-api
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: false

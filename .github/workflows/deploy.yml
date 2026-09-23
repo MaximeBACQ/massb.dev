@@ -28,3 +28,11 @@ jobs:
           tags: |
             ghcr.io/${{ env.OWNER_LC }}/portfolio:latest
             ghcr.io/${{ env.OWNER_LC }}/portfolio:${{ github.sha }}
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: ./contact-api
+          push: true
+          tags: |
+            ghcr.io/${{ env.OWNER_LC }}/portfolio-contact:latest
+            ghcr.io/${{ env.OWNER_LC }}/portfolio-contact:${{ github.sha }}
