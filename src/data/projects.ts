@@ -58,8 +58,8 @@ export interface Project {
 export const projects: Project[] = [
   {
     title: {
-      en: "[Unity game — title TBD]",
-      fr: "[Jeu Unity — titre à venir]",
+      en: "[Dunji - Dungeon Crawler]",
+      fr: "[Dunji - Dungeon Crawler]",
     },
     slug: "unity-game",
     status: "experimental",
@@ -67,15 +67,16 @@ export const projects: Project[] = [
     featured: true,
     tags: ["game"],
     description: {
-      en: "[Placeholder — one to two sentence description. Confirm wording.]",
-      fr: "[Espace réservé — description d'une à deux phrases. Formulation à confirmer.]",
+      en: "Escape the sussy maleficient dungeon !",
+      fr: "Echappez-vous d'un donjon extrêment sournois et maléfique !",
     },
-    links: [],
+    links: [{ label: "Play", url: "/Dunji/" },{ label: "Download", url: "https://massdey.itch.io/dunji" }],  
+    cover: "/Dunji/Cover.png",
   },
   {
     title: {
-      en: "[Existing itch.io game — title TBD]",
-      fr: "[Jeu itch.io existant — titre à venir]",
+      en: "[Urban Wilds - Slay'Em All]",
+      fr: "[Urban Wilds - Slay'Em All]",
     },
     slug: "itch-io-game",
     status: "stable",
@@ -83,10 +84,11 @@ export const projects: Project[] = [
     featured: false,
     tags: ["game"],
     description: {
-      en: "[Placeholder — one to two sentence description. Confirm wording.]",
-      fr: "[Espace réservé — description d'une à deux phrases. Formulation à confirmer.]",
+      en: "Animals are invading the city ! You're one of them.",
+      fr: "Les animaux ont envahi la ville ! Vous êtes l'un d'entre eux.",
     },
-    links: [],
+    links: [{ label: "Play", url: "/UrbanWilds/" },{ label: "Download", url: "https://massdey.itch.io/urban-wilds" }],  
+    cover: "/UrbanWilds/Cover.png",
   },
   {
     title: {
@@ -102,7 +104,7 @@ export const projects: Project[] = [
       en: "[Placeholder — confirm final description. Draft from CLAUDE.md: same app ported from JEE to Spring Boot.]",
       fr: "[Espace réservé — description finale à confirmer. Brouillon d'après CLAUDE.md : la même application portée de JEE vers Spring Boot.]",
     },
-    links: [],
+    links: [{ label: "Use", url: "/JeeToSpring/" },{ label: "Source Code", url: "https://github.com/MaximeBACQ/JEEProj" }],  
   },
   {
     title: {
