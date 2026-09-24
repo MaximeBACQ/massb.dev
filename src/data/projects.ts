@@ -185,6 +185,7 @@ export const projects: Project[] = [
       fr: "Parfois, les parties de league of legends peuvent s'avérer longues et énergivores. La game du repos règlera ce problème : lancez la partie avec le bouton prévu à cet effet et appuyez sur le bouton S puis ne touchez plus à rien pendant 5 secondes dès lors que vous entendez un son. Vous pourrez reprendre après ce temps. Reposé, frais et peut-être en écran gris.",
     },
     links: [{ label: "Use", url: "/Repos/" }],
+    cover: "/Repos/Cover.png"
   },
   {
     // PowerShell web tool; source-only card (no hosted demo). year provisional.
@@ -222,6 +223,7 @@ export const projects: Project[] = [
       fr: "Un jeu de plateau au tour par tour écrit en C, jouable dans la console : de 2 à 4 joueurs ou en solo contre l'IA sur une grille 10x10, avec sauvegarde et reprise de partie.",
     },
     links: [{ label: "Source Code", url: "https://github.com/MaximeBACQ/Traverse" }],
+    cover: "/Traverse/Cover.png"
   },
   {
     // L-system fractal renderer (Tkinter + turtle desktop app); source-only
@@ -241,6 +243,7 @@ export const projects: Project[] = [
       fr: "Une application Python qui dessine des fractales de type L-système à partir d'axiomes définis dans de simples fichiers JSON (règles, angle, niveau, taille), rendues avec le module turtle.",
     },
     links: [{ label: "Source Code", url: "https://github.com/MaximeBACQ/FractalDrawer" }],
+    cover: "/FractalDrawer/Cover.png"
   },
   // NOTE: the "Labs / experiments" placeholder card was removed (owner call),
   // re-add a real entry here when a small experiment is ready to show.
