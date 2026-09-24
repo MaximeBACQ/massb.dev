@@ -93,7 +93,7 @@ export const ui = {
     "contact.error.message.length": "Write at least 10 characters (5000 max).",
     "contact.error.message.links": "Too many links, keep it to 3 or fewer.",
     "contact.error.too-fast": "That was quick! Wait a few seconds and send again.",
-    "contact.error.expired": "This page has been open a while. Send again to refresh it.",
+    "contact.error.expired": "This page needs to be refreshed before you can send this form.",
     "contact.error.rate-limited":
       "Too many messages from your connection. Try again in a few minutes.",
     "contact.error.generic":
@@ -199,14 +199,14 @@ export const ui = {
     "contact.form.sending": "Envoi…",
     "contact.form.honeypot": "Laissez ce champ vide",
     "contact.form.sent.heading": "Message envoyé",
-    "contact.form.sent.body": "Merci ! Je vous réponds à",
+    "contact.form.sent.body": "Merci pour votre message, je répondrai à l'adresse",
     "contact.form.sent.again": "Écrire un autre message",
     "contact.error.name": "Indiquez votre nom (100 caractères max).",
     "contact.error.email": "Indiquez une adresse email valide pour que je puisse répondre.",
     "contact.error.message.length": "Écrivez au moins 10 caractères (5000 max).",
     "contact.error.message.links": "Trop de liens, 3 maximum.",
     "contact.error.too-fast": "C'était rapide ! Attendez quelques secondes et renvoyez.",
-    "contact.error.expired": "Cette page est ouverte depuis longtemps. Renvoyez pour la rafraîchir.",
+    "contact.error.expired": "Cette page a besoin d'être rafraîchie avant que vous puissiez envoyer ce formulaire.",
     "contact.error.rate-limited":
       "Trop de messages depuis votre connexion. Réessayez dans quelques minutes.",
     "contact.error.generic":

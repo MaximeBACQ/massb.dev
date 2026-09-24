@@ -206,12 +206,13 @@ export const projects: Project[] = [
   },
   {
     // Terminal C game; source-only card. Description condensed from the repo
-    // README (usage guide). status/year provisional.
+    // README (usage guide). status provisional.
     title: {
       en: "Traverse",
       fr: "Traverse",
     },
     slug: "traverse",
+    year: 2019,
     status: "archived",
     kind: "writeup-only",
     featured: false,
