@@ -120,7 +120,8 @@ export const projects: Project[] = [
       en: "[Placeholder — confirm final description. Draft from CLAUDE.md: PoC shellcode injection in x86_64 assembly (ELF format study).]",
       fr: "[Espace réservé — description finale à confirmer. Brouillon d'après CLAUDE.md : PoC d'injection de shellcode en assembleur x86_64 (étude du format ELF).]",
     },
-    links: [],
+    links: [{ label: "Demo Video", url: "/ELFDemo/" },{ label: "Source Code", url: "https://github.com/MaximeBACQ/ELFInfector" }],  
+    cover: "/ELFInfector/Cover.png"
   },
   {
     title: {

@@ -128,7 +128,7 @@ export const ui = {
     "hero.headline":
       "Je construis des applis, des outils de sécurité, des jeux, ou tout ce qui me semble\namusant ou utile.",
     "hero.headlineHighlight": "amusant ou utile",
-    "hero.tagline": "Tout ce qui est ici tourne sur mon homelab personnel.",
+    // "hero.tagline": "Tout ce qui est ici tourne sur mon homelab personnel.",
     "hero.selfHostLine": "Auto-hébergé sur mon propre homelab.",
     "hero.cta.primary": "Voir les projets",
     "hero.cta.secondary": "Comment c'est hébergé",
@@ -137,7 +137,7 @@ export const ui = {
     "twoLanes.dev.eyebrow": "Développement",
     "twoLanes.dev.heading": "Ce que je construis",
     "twoLanes.dev.intro":
-      "Des jeux, des applis et des outils de sécurité — ce que j'aime construire.",
+      "Des outils de sécurité, des applis, des jeux : ce que j'aime construire.",
     "twoLanes.dev.item.1": "Jeux Unity & web",
     "twoLanes.dev.item.2": "Applis full-stack",
     "twoLanes.dev.item.3": "PoC de sécurité & writeups",
@@ -145,11 +145,11 @@ export const ui = {
     "twoLanes.infra.eyebrow": "Infrastructure & auto-hébergement",
     "twoLanes.infra.heading": "Comment ça tourne",
     "twoLanes.infra.intro":
-      "Le homelab qui fait tourner tout ici, y compris ce site.",
+      "Le homelab qui fait tout tourner ici, y compris ce site.",
     "twoLanes.infra.item.1": "Virtualisation Proxmox",
     "twoLanes.infra.item.2": "Pare-feu & routage OPNsense",
     "twoLanes.infra.item.3": "Reverse proxy + TLS",
-    "twoLanes.infra.item.4": "Services hébergés sous Docker — ce site inclus",
+    "twoLanes.infra.item.4": "Services hébergés sous Docker, ce site inclus",
     "twoLanes.infra.item.5": "Sauvegardes 3-2-1",
 
     "projects.eyebrow": "Projets",
