@@ -11,7 +11,7 @@ const { status } = Astro.props;
 const lang = Astro.currentLocale ?? getLangFromUrl(Astro.url) ?? defaultLang;
 const t = useTranslations(lang);
 
-// Differentiated by dot fill + label + border style only — never a new hue.
+// Differentiated by dot fill + label + border style only, never a new hue.
 // See CLAUDE.md "Design tokens" status pill spec.
 const config: Record<ProjectStatus, { chip: string; dot: string }> = {
   stable: {

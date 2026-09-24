@@ -1,5 +1,5 @@
 // Site copy, per locale. English is the confirmed source (see CLAUDE.md); the
-// French column is a first-pass translation done at the owner's request —
+// French column is a first-pass translation done at the owner's request,
 // wording is expected to be reviewed/adjusted by the owner, not final.
 
 export const languages = {
@@ -28,7 +28,7 @@ export const ui = {
     "twoLanes.dev.eyebrow": "Development",
     "twoLanes.dev.heading": "What I build",
     "twoLanes.dev.intro":
-      "Games, apps and security tools — the things I like building.",
+      "Games, apps and security tools, the things I like building.",
     "twoLanes.dev.item.1": "Unity & web games",
     "twoLanes.dev.item.2": "Full-stack apps",
     "twoLanes.dev.item.3": "Security PoCs & writeups",
@@ -40,8 +40,7 @@ export const ui = {
     "twoLanes.infra.item.1": "Proxmox virtualization",
     "twoLanes.infra.item.2": "OPNsense firewall & routing",
     "twoLanes.infra.item.3": "Reverse proxy + TLS",
-    "twoLanes.infra.item.4": "Docker-hosted services — this site included",
-    "twoLanes.infra.item.5": "3-2-1 backups",
+    "twoLanes.infra.item.4": "Docker-hosted services, this site included",
 
     "projects.eyebrow": "Projects",
     "projects.preview.heading": "Selected work",
@@ -56,6 +55,9 @@ export const ui = {
     "projects.pcOnly": "PC only",
     "projects.noCover": "No cover yet",
     "projects.yearTbd": "TBD",
+
+    "writeup.back": "All projects",
+    "writeup.demoCaption": "Demo, recorded locally",
 
     "status.stable": "stable",
     "status.experimental": "experimental",
@@ -89,7 +91,7 @@ export const ui = {
     "contact.error.name": "Enter your name (100 characters max).",
     "contact.error.email": "Enter a valid email address so I can reply.",
     "contact.error.message.length": "Write at least 10 characters (5000 max).",
-    "contact.error.message.links": "Too many links — keep it to 3 or fewer.",
+    "contact.error.message.links": "Too many links, keep it to 3 or fewer.",
     "contact.error.too-fast": "That was quick! Wait a few seconds and send again.",
     "contact.error.expired": "This page has been open a while. Send again to refresh it.",
     "contact.error.rate-limited":
@@ -99,25 +101,27 @@ export const ui = {
 
     "hostedAtHome.eyebrow": "HOSTED AT HOME",
     "hostedAtHome.heading": "How it's hosted",
-    "hostedAtHome.intro": "[Placeholder — confirm wording]",
+    "hostedAtHome.intro":
+      "Everything on this page is served from my own hardware at home, no cloud host, no third-party platform. Here's the stack that keeps it running.",
     "hostedAtHome.item.proxmox": "Proxmox",
+    "hostedAtHome.detail.proxmox":
+      "The hypervisor everything runs on, each service lives in its own isolated VM or container.",
     "hostedAtHome.item.opnsense": "OPNsense",
+    "hostedAtHome.detail.opnsense":
+      "Firewall and router at the edge, segments the network and controls what's allowed in from outside.",
     "hostedAtHome.item.proxy": "Reverse proxy",
+    "hostedAtHome.detail.proxy":
+      "Sits in front of every service, terminates TLS and routes each hostname to the right container, this site included.",
     "hostedAtHome.item.docker": "Docker",
+    "hostedAtHome.detail.docker":
+      "Services ship as containers with docker-compose, so any of them can be rebuilt and redeployed from source.",
     "hostedAtHome.item.tls": "TLS",
-    "hostedAtHome.item.backups": "3-2-1 backups",
-    "hostedAtHome.detail": "[Placeholder — confirm details]",
+    "hostedAtHome.detail.tls":
+      "HTTPS everywhere, with certificates issued and renewed automatically.",
 
-    "about.eyebrow": "About",
-    "about.heading": "About",
-    "about.body": "[Placeholder — confirm wording]",
-
-    "footer.status": "Status",
-    "footer.graph": "Graph",
-    "footer.account": "Account",
 
     "site.description":
-      "[Placeholder site description — confirm positioning line.]",
+      "Apps, security tools and games I build, all self-hosted on my own homelab. The personal workshop and portfolio of massb.",
   },
   fr: {
     "nav.projects": "Projets",
@@ -150,7 +154,6 @@ export const ui = {
     "twoLanes.infra.item.2": "Pare-feu & routage OPNsense",
     "twoLanes.infra.item.3": "Reverse proxy + TLS",
     "twoLanes.infra.item.4": "Services hébergés sous Docker, ce site inclus",
-    "twoLanes.infra.item.5": "Sauvegardes 3-2-1",
 
     "projects.eyebrow": "Projets",
     "projects.preview.heading": "Projets sélectionnés",
@@ -165,6 +168,9 @@ export const ui = {
     "projects.pcOnly": "PC seulement",
     "projects.noCover": "Pas encore de couverture",
     "projects.yearTbd": "À venir",
+
+    "writeup.back": "Tous les projets",
+    "writeup.demoCaption": "Démo, enregistrée en local",
 
     "status.stable": "stable",
     "status.experimental": "expérimental",
@@ -198,7 +204,7 @@ export const ui = {
     "contact.error.name": "Indiquez votre nom (100 caractères max).",
     "contact.error.email": "Indiquez une adresse email valide pour que je puisse répondre.",
     "contact.error.message.length": "Écrivez au moins 10 caractères (5000 max).",
-    "contact.error.message.links": "Trop de liens — 3 maximum.",
+    "contact.error.message.links": "Trop de liens, 3 maximum.",
     "contact.error.too-fast": "C'était rapide ! Attendez quelques secondes et renvoyez.",
     "contact.error.expired": "Cette page est ouverte depuis longtemps. Renvoyez pour la rafraîchir.",
     "contact.error.rate-limited":
@@ -206,26 +212,28 @@ export const ui = {
     "contact.error.generic":
       "Le message n'a pas pu être envoyé. Réessayez dans une minute.",
 
-    "hostedAtHome.eyebrow": "HÉBERGÉ À LA MAISON",
+    "hostedAtHome.eyebrow": "HÉBERGÉ SUR MON INFRASTRUCTURE",
     "hostedAtHome.heading": "Comment c'est hébergé",
-    "hostedAtHome.intro": "[Placeholder — texte à confirmer]",
+    "hostedAtHome.intro":
+      "Tout ce que vous voyez ici est servi depuis mon propre matériel, à la maison, pas d'hébergeur cloud, pas de plateforme tierce. Voici la stack qui fait tourner l'ensemble.",
     "hostedAtHome.item.proxmox": "Proxmox",
+    "hostedAtHome.detail.proxmox":
+      "L'hyperviseur qui fait tout tourner, chaque service vit dans sa propre VM ou son propre conteneur isolé.",
     "hostedAtHome.item.opnsense": "OPNsense",
+    "hostedAtHome.detail.opnsense":
+      "Pare-feu et routeur en périphérie, segmente le réseau et contrôle ce qui entre depuis l'extérieur.",
     "hostedAtHome.item.proxy": "Reverse proxy",
+    "hostedAtHome.detail.proxy":
+      "Placé devant chaque service, il termine le TLS et route chaque nom d'hôte vers le bon conteneur, ce site compris.",
     "hostedAtHome.item.docker": "Docker",
+    "hostedAtHome.detail.docker":
+      "Les services sont livrés en conteneurs avec docker-compose : chacun peut être reconstruit et redéployé depuis les sources.",
     "hostedAtHome.item.tls": "TLS",
-    "hostedAtHome.item.backups": "Sauvegardes 3-2-1",
-    "hostedAtHome.detail": "[Placeholder — détails à confirmer]",
+    "hostedAtHome.detail.tls":
+      "HTTPS partout, avec des certificats émis et renouvelés automatiquement.",
 
-    "about.eyebrow": "À propos",
-    "about.heading": "À propos",
-    "about.body": "[Placeholder — texte à confirmer]",
-
-    "footer.status": "Statut",
-    "footer.graph": "Graphique",
-    "footer.account": "Compte",
 
     "site.description":
-      "[Placeholder — description du site à confirmer.]",
+      "Des applis, des outils de sécurité et des jeux que je construis, le tout auto-hébergé sur mon propre homelab. L'atelier et portfolio personnel de massb.",
   },
 } as const;

@@ -8,7 +8,7 @@ import { getLangFromUrl, useTranslations } from "../i18n/utils";
 const lang = Astro.currentLocale ?? getLangFromUrl(Astro.url) ?? defaultLang;
 const t = useTranslations(lang);
 
-// Only show a tag filter if a current project actually uses it — no dead pills.
+// Only show a tag filter if a current project actually uses it, no dead pills.
 const ALL_TAGS: ProjectTag[] = [
   "game",
   "tool",

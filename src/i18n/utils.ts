@@ -15,7 +15,7 @@ export function useTranslations(lang: Lang) {
 }
 
 // Strips a leading locale prefix (any locale other than the default, which
-// is never prefixed — see astro.config.mjs `prefixDefaultLocale: false`) so
+// is never prefixed, see astro.config.mjs `prefixDefaultLocale: false`) so
 // a switcher link can be rebuilt for a different locale from the current path.
 const prefixedLocales = (Object.keys(ui) as Lang[]).filter(
   (l) => l !== defaultLang,

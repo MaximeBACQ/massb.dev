@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Writeup from "../../components/Writeup.astro";
+import { projects } from "../../data/projects";
+import { defaultLang } from "../../i18n/ui";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+export async function getStaticPaths() {
+  const writeups = await getCollection("writeups");
+  return writeups.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const lang = Astro.currentLocale ?? getLangFromUrl(Astro.url) ?? defaultLang;
+const t = useTranslations(lang);
+
+const project = projects.find((p) => p.slug === entry.data.project);
+const pageTitle = project ? `${project.title[lang]}, massb.dev` : "massb.dev";
+---
+
+<BaseLayout title={pageTitle} description={project?.description[lang] ?? t("site.description")}>
+  <main>
+    <Writeup entry={entry} />
+  </main>
+</BaseLayout>

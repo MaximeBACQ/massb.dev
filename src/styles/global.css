@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
-/* Self-hosted fonts — bundled at build time, no external network calls at runtime. */
+/* Self-hosted fonts, bundled at build time, no external network calls at runtime. */
 /* Display face is a single swappable token (--font-display below). Current
    pick: Fraunces (600/700). Swappable alternates: @fontsource/bricolage-grotesque
-   (700/800) or @fontsource/poppins (700/800) — swap the import + token together. */
+   (700/800) or @fontsource/poppins (700/800), swap the import + token together. */
 @import "@fontsource/fraunces/600.css";
 @import "@fontsource/fraunces/700.css";
 @import "@fontsource/ibm-plex-mono/400.css";
@@ -11,11 +11,11 @@
 @import "@fontsource/ibm-plex-sans/400.css";
 @import "@fontsource/ibm-plex-sans/500.css";
 @import "@fontsource/ibm-plex-sans/600.css";
-/* Wordmark face (trial): Nabla — a colour (COLRv1) font, so it renders its own
+/* Wordmark face (trial): Nabla, a colour (COLRv1) font, so it renders its own
    built-in palette and ignores CSS `color`. Used only on the header "massb.dev". */
 @import "@fontsource/nabla/400.css";
 
-/* Warm-autumn design tokens — see CLAUDE.md for the approved palette/type rationale. */
+/* Warm-autumn design tokens, see CLAUDE.md for the approved palette/type rationale. */
 @theme {
   --color-bg: #171310;
   --color-surface: #221c16;
@@ -25,7 +25,7 @@
   --color-accent: #b8502e;
   --color-accent-2: #6f7444;
   --color-archived: #6b6058;
-  /* Warm brown from the INFRA blob in public/objects.svg — project cover hover wash. */
+  /* Warm brown from the INFRA blob in public/objects.svg, project cover hover wash. */
   --color-bark: #8b5a3c;
 
   --font-display: "Fraunces", serif;

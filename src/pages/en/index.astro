@@ -4,7 +4,6 @@ import Hero from "../../components/Hero.astro";
 import TwoLanes from "../../components/TwoLanes.astro";
 import ProjectsPreview from "../../components/ProjectsPreview.astro";
 import HostedAtHome from "../../components/HostedAtHome.astro";
-import About from "../../components/About.astro";
 import { defaultLang } from "../../i18n/ui";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import { getRelativeLocaleUrl } from "astro:i18n";
@@ -30,6 +29,5 @@ const t = useTranslations(lang);
     <TwoLanes />
     <ProjectsPreview />
     <HostedAtHome />
-    <About />
   </main>
 </BaseLayout>

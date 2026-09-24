@@ -1,0 +1,196 @@
+---
+// Renders one writeup-only project page: the shared header pulled from
+// src/data/projects.ts (title/status/tags/description/links), an optional
+// same-origin demo video, then the long-form Markdown body. Locale-agnostic
+// body (technical English), localized chrome, mounted by both the default
+// and /en/ writeup routes.
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
+import { projects } from "../data/projects";
+import StatusPill from "./StatusPill.astro";
+import { defaultLang } from "../i18n/ui";
+import { getLangFromUrl, useTranslations, type Lang } from "../i18n/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+interface Props {
+  entry: CollectionEntry<"writeups">;
+}
+
+const { entry } = Astro.props;
+const lang: Lang = (Astro.currentLocale as Lang) ?? getLangFromUrl(Astro.url) ?? defaultLang;
+const t = useTranslations(lang);
+
+const project = projects.find((p) => p.slug === entry.data.project);
+if (!project) {
+  throw new Error(
+    `Writeup "${entry.id}" references unknown project slug "${entry.data.project}".`,
+  );
+}
+
+const { Content } = await render(entry);
+const isExternal = (url: string) => /^https?:\/\//.test(url);
+
+const tagLabels: Record<string, string> = {
+  game: t("tag.game"),
+  tool: t("tag.tool"),
+  cyber: t("tag.cyber"),
+  web: t("tag.web"),
+  backend: t("tag.backend"),
+  "low-level": t("tag.low-level"),
+  industrial: t("tag.industrial"),
+};
+---
+
+<article class="px-6 py-16 sm:px-10">
+  <div class="mx-auto max-w-3xl">
+    <a
+      href={getRelativeLocaleUrl(lang, "/projects")}
+      class="tap-target font-mono text-xs uppercase tracking-wide text-text-muted transition-colors hover:text-accent"
+    >
+      ← {t("writeup.back")}
+    </a>
+
+    <header class="mt-6 border-b border-border pb-8">
+      <div class="flex flex-wrap items-center gap-2">
+        <StatusPill status={project.status} />
+        {
+          project.tags.map((tag) => (
+            <span class="font-mono text-[11px] uppercase tracking-wide text-text-muted">
+              {tagLabels[tag] ?? tag}
+            </span>
+          ))
+        }
+        {
+          project.year && (
+            <span class="font-mono text-[11px] uppercase tracking-wide text-text-muted">
+              {project.year}
+            </span>
+          )
+        }
+      </div>
+
+      <h1 class="mt-4 font-display text-4xl font-bold leading-tight text-text sm:text-5xl">
+        {project.title[lang]}
+      </h1>
+      <p class="mt-4 max-w-prose font-sans text-text-muted">
+        {project.description[lang]}
+      </p>
+
+      {
+        project.links.length > 0 && (
+          <div class="mt-6 flex flex-wrap gap-3">
+            {project.links
+              .filter((link) => isExternal(link.url))
+              .map((link) => (
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener"
+                  class="tap-target inline-flex items-center gap-1.5 border border-border px-3 py-1.5 font-mono text-xs uppercase tracking-wide text-text-muted transition-colors hover:border-accent hover:text-accent"
+                >
+                  {link.label} ↗
+                </a>
+              ))}
+          </div>
+        )
+      }
+    </header>
+
+    {
+      entry.data.video && (
+        <figure class="mt-10">
+          <video
+            class="w-full border border-border bg-black"
+            controls
+            preload="none"
+            playsinline
+            poster={entry.data.videoPoster}
+          >
+            <source src={entry.data.video} type="video/webm" />
+          </video>
+          <figcaption class="mt-2 font-mono text-[11px] uppercase tracking-wide text-text-muted">
+            {t("writeup.demoCaption")}
+          </figcaption>
+        </figure>
+      )
+    }
+
+    <div class="writeup-body mt-10 max-w-prose">
+      <Content />
+    </div>
+  </div>
+</article>
+
+<style>
+  /* Long-form Markdown styling, scoped to the writeup body so it doesn't leak
+     into the rest of the site. Uses the same warm-autumn tokens. */
+  .writeup-body :global(h2) {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    color: var(--color-text);
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .writeup-body :global(h3) {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--color-text);
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  .writeup-body :global(p),
+  .writeup-body :global(li) {
+    font-family: var(--font-sans);
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+  .writeup-body :global(p) {
+    margin-bottom: 1rem;
+  }
+  .writeup-body :global(ul) {
+    list-style: disc;
+    padding-left: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .writeup-body :global(li) {
+    margin-bottom: 0.35rem;
+  }
+  .writeup-body :global(a) {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .writeup-body :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+    padding: 0.1em 0.35em;
+  }
+  .writeup-body :global(pre) {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 1rem;
+    overflow-x: auto;
+    margin-bottom: 1.25rem;
+  }
+  .writeup-body :global(pre code) {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+  .writeup-body :global(blockquote) {
+    border-left: 2px solid var(--color-accent-2);
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+</style>

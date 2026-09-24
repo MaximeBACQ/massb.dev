@@ -1,8 +1,8 @@
 ---
-// Infra nouns (Proxmox, OPNsense, reverse proxy, Docker, TLS, 3-2-1 backups)
-// are approved in CLAUDE.md ("Hosted at home" note); exact specs/figures are
-// not, so every item's detail line stays an explicit placeholder — see
-// CLAUDE.md hard rule and TODO.md "Outstanding questions".
+// Infra layers (Proxmox, OPNsense, reverse proxy, Docker, TLS, 3-2-1 backups)
+// and their roles are the architecture confirmed in CLAUDE.md ("Hosted at
+// home" note + Infra lane). Each detail line describes that confirmed role,
+// no invented figures/hardware; specific numbers can be added later.
 
 import { defaultLang } from "../i18n/ui";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
@@ -11,12 +11,11 @@ const lang = Astro.currentLocale ?? getLangFromUrl(Astro.url) ?? defaultLang;
 const t = useTranslations(lang);
 
 const items = [
-  t("hostedAtHome.item.proxmox"),
-  t("hostedAtHome.item.opnsense"),
-  t("hostedAtHome.item.proxy"),
-  t("hostedAtHome.item.docker"),
-  t("hostedAtHome.item.tls"),
-  t("hostedAtHome.item.backups"),
+  { label: t("hostedAtHome.item.proxmox"), detail: t("hostedAtHome.detail.proxmox") },
+  { label: t("hostedAtHome.item.opnsense"), detail: t("hostedAtHome.detail.opnsense") },
+  { label: t("hostedAtHome.item.proxy"), detail: t("hostedAtHome.detail.proxy") },
+  { label: t("hostedAtHome.item.docker"), detail: t("hostedAtHome.detail.docker") },
+  { label: t("hostedAtHome.item.tls"), detail: t("hostedAtHome.detail.tls") },
 ];
 ---
 
@@ -37,9 +36,9 @@ const items = [
       {
         items.map((item) => (
           <div class="border border-border bg-surface p-5">
-            <p class="font-mono text-sm text-text">{item}</p>
+            <p class="font-mono text-sm text-text">{item.label}</p>
             <p class="mt-2 font-sans text-sm text-text-muted">
-              {t("hostedAtHome.detail")}
+              {item.detail}
             </p>
           </div>
         ))

@@ -8,7 +8,7 @@ const lang = Astro.currentLocale ?? getLangFromUrl(Astro.url) ?? defaultLang;
 const t = useTranslations(lang);
 ---
 
-<BaseLayout title="Projects — massb.dev" description={t("site.description")}>
+<BaseLayout title="Projects, massb.dev" description={t("site.description")}>
   <main>
     <ProjectsGrid />
   </main>
