@@ -1,0 +1,16 @@
+# Weekly update PRs for everything with a version: npm packages (site and
+# contact relay), Docker base images, and the pinned GitHub Actions SHAs.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule: { interval: weekly }
+  - package-ecosystem: npm
+    directory: /contact-api
+    schedule: { interval: weekly }
+  - package-ecosystem: docker
+    directories: [/, /contact-api]
+    schedule: { interval: weekly }
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: weekly }

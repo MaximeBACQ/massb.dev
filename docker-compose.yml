@@ -2,14 +2,30 @@ services:
   web:
     build: .
     ports:
-      - "${WEB_PORT:-8080}:80"
+      # Bound to localhost by default: Docker's port publishing bypasses the
+      # host firewall, so 0.0.0.0 would let anyone on the LAN (or a stray
+      # router forward) reach nginx directly and skip the reverse proxy. If the
+      # reverse proxy runs on another machine/VM, set WEB_BIND to this host's
+      # private IP instead (never 0.0.0.0).
+      - "${WEB_BIND:-127.0.0.1}:${WEB_PORT:-8080}:80"
     restart: unless-stopped
     # No domain is hardcoded here. TLS termination and the public domain are
     # handled by the reverse proxy in front of this container (see CLAUDE.md
-    # "Hosted at home") — point it at this service's port, or set WEB_PORT
-    # to change the host-side port.
+    # "Hosted at home"): point it at this service's port.
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
+      - /tmp
+    # nginx's master process needs these to bind :80 and drop to its worker user.
+    cap_drop: [ALL]
+    cap_add: [CHOWN, SETUID, SETGID, NET_BIND_SERVICE]
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 128m
+    pids_limit: 100
 
-  # Contact form relay — reached only through the web container's nginx at
+  # Contact form relay: reached only through the web container's nginx at
   # /api/contact, never exposed directly. SMTP settings come from .env
   # (see .env.example).
   contact:
@@ -18,3 +34,9 @@ services:
     env_file:
       - path: .env
         required: false
+    read_only: true
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 256m
+    pids_limit: 100

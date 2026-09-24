@@ -62,3 +62,19 @@ For local dev, run the relay next to `npm run dev` (Astro proxies `/api` to it):
 ```sh
 cd contact-api && npm install && SMTP_HOST=... MAIL_FROM=... node server.mjs
 ```
+
+## Security
+
+- **CSP**: Astro emits a `<meta>` CSP with hashes of its own inline scripts
+  (`security.csp` in `astro.config.mjs`); nginx adds a per-path CSP header plus
+  HSTS, `nosniff`, frame, referrer and permissions policies (`nginx.conf`).
+  Adding an external script, font or image origin means updating both.
+- **Real client IP**: nginx trusts `X-Forwarded-For` hops from private ranges
+  and Cloudflare's published ranges, so rate limits are per visitor. Update the
+  Cloudflare list in `nginx.conf` if https://www.cloudflare.com/ips/ changes.
+- **Containers**: the web port is published on `127.0.0.1` only (set `WEB_BIND`
+  to a private IP if the reverse proxy is on another host, never `0.0.0.0`).
+  Both services run read-only with all capabilities dropped except what nginx
+  needs, `no-new-privileges`, and memory/pid limits.
+- **Supply chain**: GitHub Actions are pinned to commit SHAs; Dependabot opens
+  weekly update PRs for npm, Docker base images and actions.

@@ -8,6 +8,12 @@ import { getLangFromUrl, useTranslations } from "../i18n/utils";
 const lang = Astro.currentLocale ?? getLangFromUrl(Astro.url) ?? defaultLang;
 const t = useTranslations(lang);
 
+// Newest first. Filters only hide cards, so every filtered view keeps this
+// order too. Same-year projects keep their data-file order; no year sorts last.
+const sortedProjects = [...projects].sort(
+  (a, b) => (b.year ?? -Infinity) - (a.year ?? -Infinity),
+);
+
 // Only show a tag filter if a current project actually uses it, no dead pills.
 const ALL_TAGS: ProjectTag[] = [
   "game",
@@ -114,7 +120,7 @@ const statusLabels: Record<ProjectStatus, string> = {
       class="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
       data-project-grid
     >
-      {projects.map((project) => <ProjectCard project={project} />)}
+      {sortedProjects.map((project) => <ProjectCard project={project} />)}
     </div>
 
     <p
